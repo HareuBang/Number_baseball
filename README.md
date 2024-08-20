@@ -18,3 +18,8 @@ Devcos 코드 리뷰
 1. .includes 대신 Set 사용해보기
 2. if문 대신 에러처리 사용해보기
 3. innerHTML의 보안취약점
+
+----
+1. CSS, 디자인 부족.
+2. 시멘틱 태그
+3. event.preventDefault();
