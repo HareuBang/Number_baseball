@@ -21,7 +21,7 @@ function generateRandomNumber() {
 }
 
 // 버튼 클릭 시
-$button.addEventListener('click', () => {
+$button.addEventListener('click', (event) => {
   event.preventDefault();
 
   let player = inputValidation($input.value);
