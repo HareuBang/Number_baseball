@@ -5,6 +5,21 @@ const $p = document.querySelector('p');
 let computer = generateRandomNumber();
 let count = 0;
 
+// 컴퓨터 숫자 4자리 설정
+function generateRandomNumber() {
+  let randomNumbers = [];
+
+  while(randomNumbers.length < 4){
+    let num = Math.floor(Math.random() * 10);
+
+    // 중복 숫자 판별
+    if(!randomNumbers.includes(num))
+      randomNumbers.push(num);
+  }
+
+  return randomNumbers;
+}
+
 // 버튼 클릭 시
 $button.addEventListener('click', () => {
   event.preventDefault();
@@ -27,19 +42,32 @@ $button.addEventListener('click', () => {
   }
 })
 
-// 컴퓨터 숫자 4자리 설정
-function generateRandomNumber() {
-  let randomNumbers = [];
+// 입력 값 검사
+function inputValidation(inputValue) {
+  // new Set() 중복 제거 - split().filter() 공백 제거 - 숫자 타입 변환 map()
+  let inputList = [...new Set(inputValue.split('').filter(numStr => numStr !== " "))].map(Number);
+  
+  return inputList.length === 4 && inputList.every(num => 0 <= num && num <= 9)
+    ? inputList
+    : false
+}
 
-  while(randomNumbers.length < 4){
-    let num = Math.floor(Math.random() * 10);
+// 숫자 판별(스트라이크, 볼, 아웃)
+function guessNumber(player) {
+  let result = [0, 0, 0];
 
-    // 중복 숫자 판별
-    if(!randomNumbers.includes(num))
-      randomNumbers.push(num);
-  }
+  player.forEach((num, idx) => {
+    let guess = computer.indexOf(num);
+    
+    if(guess === -1)
+      result[2]++;
+    else if(guess !== idx)
+      result[1]++;
+    else
+      result[0]++;
+  })
 
-  return randomNumbers;
+  return result;
 }
 
 // 결과 출력
@@ -68,34 +96,6 @@ function outputResult(player, [strike, ball, out]) {
     if(count === 10)
       resetGame("Computer Win");
   }
-}
-
-// 입력 값 검사
-function inputValidation(inputValue) {
-  // new Set() 중복 제거 - split().filter() 공백 제거 - 숫자 타입 변환 map()
-  let inputList = [...new Set(inputValue.split('').filter(numStr => numStr !== " "))].map(Number);
-  
-  return inputList.length === 4 && inputList.every(num => 0 <= num && num <= 9)
-    ? inputList
-    : false
-}
-
-// 숫자 판별(스트라이크, 볼, 아웃)
-function guessNumber(player) {
-  let result = [0, 0, 0];
-
-  player.forEach((num, idx) => {
-    let guess = computer.indexOf(num);
-    
-    if(guess === -1)
-      result[2]++;
-    else if(guess !== idx)
-      result[1]++;
-    else
-      result[0]++;
-  })
-
-  return result;
 }
 
 // 게임 초기화
