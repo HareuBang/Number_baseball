@@ -2,6 +2,8 @@
 
 1차 : 08/08  <제로초JS입문 7장 숫자야구 1>
 
+https://hareubang.github.io/Number_baseball/
+
 Devcos 코드 리뷰
 
 보완점
