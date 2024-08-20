@@ -10,6 +10,8 @@ Devcos 코드 리뷰
 3. eventListener에서 (event)로 명확하게 표현 해주기
 4. innerHTML은 XSS 해킹에 대해 보안취약점을 가지고 있기 때문에 사용을 지양해야하며 createElement 등을 사용하는 방향으로 개선 해보기
 
+----
+
 추천 학습
 1. .includes 대신 Set 사용해보기
 2. if문 대신 에러처리 사용해보기
